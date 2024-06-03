@@ -1,48 +1,49 @@
-import { mems } from "./MemArray";
-import React, { useState } from "react";
+import React from "react";
 import "./MemsLogic.css";
 
-export function MemsLogic(props) {
-  const [votes, setVotes] = useState(
-    mems.map((mem) => ({ upvotes: mem.upvotes, downvotes: mem.downvotes }))
-  );
-
-  const clickHandlerPlus = (index) => {
-    const newVotes = [...votes];
-    newVotes[index].upvotes++;
-    setVotes(newVotes);
+export function MemsLogic({ memes, isHot, setMemes }) {
+  const clickHandlerPlus = (id) => {
+    setMemes((prevMemes) =>
+      prevMemes.map((mem) =>
+        mem.id === id ? { ...mem, upvotes: mem.upvotes + 1 } : mem
+      )
+    );
   };
 
-  const clickHandlerMinus = (index) => {
-    const newVotes = [...votes];
-    newVotes[index].downvotes++;
-    setVotes(newVotes);
+  const clickHandlerMinus = (id) => {
+    setMemes((prevMemes) =>
+      prevMemes.map((mem) =>
+        mem.id === id ? { ...mem, downvotes: mem.downvotes + 1 } : mem
+      )
+    );
   };
+
+  const filteredMemes = isHot
+    ? memes.filter((meme) => meme.upvotes - meme.downvotes > 5)
+    : memes;
 
   return (
     <div className="memsContainer">
-      {mems.map((mem, index) => (
-        <div key={index} className="oneMem">
+      {filteredMemes.map((mem) => (
+        <div key={mem.id} className="oneMem">
           <img src={mem.img} alt={mem.title} />
           <div className="likesContainer">
             <div className="counters">
-              <p className="countingPlus">{votes[index].upvotes} </p>
-              <p className="countingMinus">{votes[index].downvotes} </p>
+              <p className="countingPlus">{mem.upvotes} </p>
+              <p className="countingMinus">{mem.downvotes} </p>
             </div>
             <div className="buttons">
               <button
                 className="operatorButton"
-                onClick={() => clickHandlerPlus(index)}
+                onClick={() => clickHandlerPlus(mem.id)}
               >
-                {" "}
-                +{" "}
+                +
               </button>
               <button
                 className="operatorButton"
-                onClick={() => clickHandlerMinus(index)}
+                onClick={() => clickHandlerMinus(mem.id)}
               >
-                {" "}
-                -{" "}
+                -
               </button>
             </div>
           </div>

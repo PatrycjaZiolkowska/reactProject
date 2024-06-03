@@ -32,7 +32,7 @@ h1 {
   margin: 8px 8px;
   width: 150px;
   transition: background-color 0.3s, color 0.3s; /*przejście płynne*/
-  outline: none; /* Usunięcie obramowania fokusu */
+  outline: none;
   text-decoration: none;
   color: #add8e6;
 

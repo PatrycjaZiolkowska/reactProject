@@ -1,13 +1,13 @@
 import "./App.css";
 import { mems } from "./components/MemArray";
-import { MemNewComponent } from "./components/MemsLogic";
 import { MemsLogic } from "./components/MemsLogic";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import { RegularMems } from "./pages/RegularMems";
-import { HotMems } from "./pages/HotMems";
 import { Error404 } from "./pages/Error404";
+import { useState } from "react";
 
 function App() {
+  const [memes, setMemes] = useState(mems);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -22,9 +22,19 @@ function App() {
         </nav>
         <div className="buttonAppContainer">
           <Routes>
-            <Route path="/" element={<RegularMems />}></Route>
-            <Route path="/hot" element={<HotMems />}></Route>
-            <Route path="*" element={<Error404 />}></Route>
+            <Route
+              path="/"
+              element={
+                <MemsLogic memes={memes} isHot={false} setMemes={setMemes} />
+              }
+            />
+            <Route
+              path="/hot"
+              element={
+                <MemsLogic memes={memes} isHot={true} setMemes={setMemes} />
+              }
+            />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </div>
       </BrowserRouter>
