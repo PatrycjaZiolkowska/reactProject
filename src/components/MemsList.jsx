@@ -1,5 +1,5 @@
 import React from "react";
-import "./MemsLogic.css";
+import "./MemsList.css";
 
 export function MemsLogic({ memes, isHot, setMemes }) {
   const clickHandlerPlus = (id) => {

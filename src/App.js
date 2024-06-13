@@ -1,6 +1,7 @@
 import "./App.css";
-import { mems } from "./components/MemArray";
-import { MemsLogic } from "./components/MemsLogic";
+// import { mems } from "./components/MemArray";
+import { mems } from "./MemArray";
+import { MemsLogic } from "./components/MemsList";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { Error404 } from "./pages/Error404";
 import { useState } from "react";
